@@ -2,6 +2,8 @@ package com.nbc.ecommerceApp.controller;
 
 import com.nbc.ecommerceApp.model.Product;
 import com.nbc.ecommerceApp.service.ProductService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.actuate.endpoint.annotation.Endpoint;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,6 +13,7 @@ public class ProductsController {
 
     private final ProductService productService;
 
+    @Autowired
     public ProductsController(ProductService productService) {
         this.productService = productService;
     }
