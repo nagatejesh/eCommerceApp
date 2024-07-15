@@ -2,6 +2,7 @@ package com.nbc.ecommerceApp.controller;
 
 import com.nbc.ecommerceApp.model.Product;
 import com.nbc.ecommerceApp.service.ProductService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.actuate.endpoint.annotation.Endpoint;
 import org.springframework.web.bind.annotation.*;
@@ -28,7 +29,7 @@ public class ProductsController {
     }
 
     @PostMapping("/product")
-    public void addProduct(@RequestBody Product product) {
+    public void addProduct(@RequestBody @Valid Product product) {
         productService.addProduct(product);
     }
 
