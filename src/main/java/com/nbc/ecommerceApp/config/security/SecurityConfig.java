@@ -25,11 +25,17 @@ public class SecurityConfig {
 
     @Bean
     static SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests((requests) -> requests.anyRequest().authenticated()); //all endpoints are secured - need authorization
-        http.sessionManagement(session->
-                session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)); //session creation policy set to stateless
+        http.authorizeHttpRequests(requests
+                        -> requests.requestMatchers("/h2-console/**").permitAll() //h2 console authorization removed
+                        .anyRequest().authenticated())  //all endpoints are secured - need authorization
+                .sessionManagement(session
+                        -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) //session creation policy set to stateless
+                .csrf(csrf
+                        ->csrf.disable()) //disabled for DML/DDL requests
+                .headers(header
+                        ->header.frameOptions(frames -> frames.sameOrigin())) //enable same origin frame options to display h2 console
+                .httpBasic(withDefaults()); //basic authentication is enabled
 //        http.formLogin(withDefaults()); //form login disabled
-        http.httpBasic(withDefaults()); //basic authentication is enabled
         return http.build();
     }
 
