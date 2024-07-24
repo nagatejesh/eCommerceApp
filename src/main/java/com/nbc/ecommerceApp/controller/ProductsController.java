@@ -5,6 +5,7 @@ import com.nbc.ecommerceApp.service.ProductService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.actuate.endpoint.annotation.Endpoint;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,15 +30,19 @@ public class ProductsController {
     }
 
     @PostMapping("/product")
+    @PreAuthorize("hasRole('ADMIN')")
     public void addProduct(@RequestBody @Valid Product product) {
         productService.addProduct(product);
     }
 
     @PutMapping("/product")
+    @PreAuthorize("hasRole('ADMIN')")
     public void updateProduct(@RequestBody Product product) {
         productService.updateProduct(product);
     }
+
     @DeleteMapping("/products/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public void deleteProduct(@PathVariable int id) {
         productService.deleteProduct(id);
     }
