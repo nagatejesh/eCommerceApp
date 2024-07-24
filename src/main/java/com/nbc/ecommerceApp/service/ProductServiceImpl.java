@@ -4,9 +4,10 @@ import com.nbc.ecommerceApp.exception.ProductNotFoundException;
 import com.nbc.ecommerceApp.model.Product;
 import com.nbc.ecommerceApp.repository.ProductRepo;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PagedModel;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 @Slf4j
@@ -18,8 +19,8 @@ public class ProductServiceImpl implements ProductService {
         this.productRepo = productRepo;
     }
 
-    public List<Product> getProducts() {
-        return productRepo.findAll();
+    public PagedModel<Product> getProducts(int pageNo, int perPage, String sort) {
+        return new PagedModel<>(productRepo.findAll(PageRequest.of(pageNo, perPage, Sort.by(sort))));
     }
 
     public Product getProductById(int id) {

@@ -4,11 +4,9 @@ import com.nbc.ecommerceApp.model.Product;
 import com.nbc.ecommerceApp.service.ProductService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.actuate.endpoint.annotation.Endpoint;
+import org.springframework.data.web.PagedModel;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 public class ProductsController {
@@ -21,8 +19,10 @@ public class ProductsController {
     }
 
     @GetMapping("/products")
-    public List<Product> getAllProducts() {
-        return productService.getProducts();
+    public PagedModel<Product> getAllProducts(@RequestParam(name = "pageno", required = false, defaultValue = "1") int pageNo,
+                                              @RequestParam(name = "perpage", required = false, defaultValue = "10") int recPerPage,
+                                              @RequestParam(name = "sortby", required = false, defaultValue = "price") String sort) {
+        return productService.getProducts(pageNo, recPerPage, sort);
     }
     @GetMapping("/products/{id}")
     public Product getProductById(@PathVariable int id) {
