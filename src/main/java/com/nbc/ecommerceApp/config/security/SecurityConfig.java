@@ -48,7 +48,7 @@ public class SecurityConfig {
         return http.build();
     }
 
-    @Bean
+    /*@Bean
     UserDetailsService getUserDetails() {
         UserDetails user = User.withUsername("user")
                 .password(getPasswordEncoder().encode("userpass"))
@@ -63,7 +63,7 @@ public class SecurityConfig {
         userDetailsManager.createUser(admin);
 //        return new InMemoryUserDetailsManager(user, admin);
         return userDetailsManager;
-    }
+    }*/
 
     @Bean
     static RoleHierarchy roleHierarchy() {
