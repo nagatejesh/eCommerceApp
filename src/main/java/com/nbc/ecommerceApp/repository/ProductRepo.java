@@ -1,4 +1,4 @@
-package com.nbc.ecommerceApp.reposiroty;
+package com.nbc.ecommerceApp.repository;
 
 import com.nbc.ecommerceApp.model.Product;
 import org.springframework.data.jpa.repository.JpaRepository;

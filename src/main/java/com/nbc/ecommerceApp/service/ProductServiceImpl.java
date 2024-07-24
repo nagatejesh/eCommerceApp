@@ -2,7 +2,7 @@ package com.nbc.ecommerceApp.service;
 
 import com.nbc.ecommerceApp.exception.ProductNotFoundException;
 import com.nbc.ecommerceApp.model.Product;
-import com.nbc.ecommerceApp.reposiroty.ProductRepo;
+import com.nbc.ecommerceApp.repository.ProductRepo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
